@@ -1,0 +1,91 @@
+#include <SendOnlySoftwareSerial.h>
+
+#include <ArduinoInit.h>
+
+int lightside, darkside;
+
+int light=1;
+
+int dark=0;
+
+unsigned int value;
+
+void setup()
+
+{
+
+  configArduino();
+
+  outputHigh(4);
+
+  value=readADC(2);
+
+  if (value<100);
+
+  {
+
+    lightside=light;
+
+  }
+
+  if (value > 100);
+
+  {
+
+    darkside=dark;
+
+  }
+
+  Serial.write("lightside:");
+
+  Serial.write(lightside);
+
+  // put your setup code here, to run once:
+
+ 
+
+}
+
+ 
+
+void loop()
+
+{
+
+  value=readADC(2);
+
+  Serial.println(value);
+
+ if (value <100)
+
+ {
+
+   motors('B','A',80);
+
+ }
+
+ else if (value > 100); //may change it latter
+
+ {
+
+    motors('1','a',60);
+
+   motors('2','b',60);
+
+ }
+
+ 
+
+  
+
+ 
+
+Serial.write ("darksideL:");
+
+Serial.write( darkside);
+
+Serial.write("\n");
+
+pause(100);
+
+}
